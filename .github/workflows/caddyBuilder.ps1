@@ -1,6 +1,6 @@
 ﻿$containers = @(
 "library/caddy" # Main caddy container
-"slothcroissant/caddy-cloudflaredns" # Custom caddy container
+"silycr/caddy-cloudflaredns" # Custom caddy container
 )
 
 $imageVersions = @{}
@@ -21,36 +21,36 @@ foreach ($container in $containers)
 }
 
 $latestOfficialVersion = $imageVersions["library/caddy"][0]
-$latestSlothcrossantVersion = $imageVersions["slothcroissant/caddy-cloudflaredns"][0]
+$latestSlothcrossantVersion = $imageVersions["silycr/caddy-cloudflaredns"][0]
 
 Write-Output "Latest Offical version: $latestOfficialVersion"
-Write-Output "Latest Slothcroissant version: $latestSlothcrossantVersion"
+Write-Output "Latest silycr version: $latestSlothcrossantVersion"
 
-if ($imageVersions["library/caddy"].IndexOf($imageVersions["slothcroissant/caddy-cloudflaredns"][0]) -gt 0)
+if ($imageVersions["library/caddy"].IndexOf($imageVersions["silycr/caddy-cloudflaredns"][0]) -gt 0)
 {
-    Write-Output "Docker image slothcroissant/caddy-cloudflaredns:$($imageVersions[`"slothcroissant/caddy-cloudflaredns`"][0]) is $($imageVersions["library/caddy"].IndexOf($imageVersions["slothcroissant/caddy-cloudflaredns"][0])) version behind image library/caddy:$($imageVersions[`"library/caddy`"][0])"
+    Write-Output "Docker image silycr/caddy-cloudflaredns:$($imageVersions[`"silycr/caddy-cloudflaredns`"][0]) is $($imageVersions["library/caddy"].IndexOf($imageVersions["silycr/caddy-cloudflaredns"][0])) version behind image library/caddy:$($imageVersions[`"library/caddy`"][0])"
     $regexStrings = Get-Content .\Dockerfile | Select-String '\d+\.\d+\.\d+' -AllMatches
 
     foreach ($string in $regexStrings)
     {
         Write-Output "   Processing line:     `"$string`""
         $oldString = $string.tostring()
-        $newString = $oldString.replace($imageVersions["slothcroissant/caddy-cloudflaredns"][0],$latestOfficialVersion)
+        $newString = $oldString.replace($imageVersions["silycr/caddy-cloudflaredns"][0],$latestOfficialVersion)
         Write-Output "   New line:            `"$newString`""
         (Get-Content .\Dockerfile).Replace($oldString,$newString) | Set-Content .\Dockerfile
     }
 }
 else
 {
-    Write-Output "Docker image slothcroissant/caddy-cloudflaredns:$($imageVersions[`"slothcroissant/caddy-cloudflaredns`"][0]) matches image library/caddy:$($imageVersions[`"library/caddy`"][0])"
+    Write-Output "Docker image silycr/caddy-cloudflaredns:$($imageVersions[`"silycr/caddy-cloudflaredns`"][0]) matches image library/caddy:$($imageVersions[`"library/caddy`"][0])"
 }
 
 
 Write-Output ""
 Write-Output "***************************************"
 Write-Output "Performing Git Operations..."
-git config user.email "ryan@ryanb.tv"
-git config user.name "SlothCroissant"
+git config user.email "blank@email.com"
+git config user.name "silycr"
 Write-Output "Staging all changed files..."
 git add .
 if (git diff HEAD)
