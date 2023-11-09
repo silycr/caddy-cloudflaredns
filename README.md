@@ -1,3 +1,13 @@
+Modified to include
+
+* [github.com/caddy-dns/cloudflare](https://github.com/caddy-dns/cloudflare)
+
+* [github.com/lucaslorentz/caddy-docker-proxy/v2](https://github.com/lucaslorentz/caddy-docker-proxy/v2)
+
+* [github.com/greenpau/caddy-security](https://github.com/greenpau/caddy-security)
+
+Enables use behind cloudflared tunnel or local network, generating automatic certificates, https upgrade and additional security features 
+
 [![Latest Release][version-image]][version-url]
 [![caddy on DockerHub][dockerhub-image]][dockerhub-url]
 [![Docker Build][gh-actions-image]][gh-actions-url]
