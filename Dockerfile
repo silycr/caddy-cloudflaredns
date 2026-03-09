@@ -1,4 +1,4 @@
-FROM caddy:2.10.2-builder AS builder
+FROM caddy:2.11.2-builder AS builder
 
 RUN xcaddy build \
     --with github.com/caddy-dns/cloudflare \    
@@ -8,7 +8,7 @@ RUN xcaddy build \
     --with github.com/greenpau/caddy-security   
     # Authentication Plugin for implementing Form-Based, Basic, Local, LDAP, OpenID Connect, OAuth 2.0, SAML Authentication; https://caddyserver.com/docs/modules/http.handlers.authenticator
 
-FROM caddy:2.10.2
+FROM caddy:2.11.2
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 
